@@ -1,7 +1,5 @@
-/* styles.css */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
 }
@@ -9,7 +7,7 @@ body {
 header {
     background-color: #333;
     color: white;
-    padding: 15px 0;
+    padding: 10px;
     text-align: center;
 }
 
@@ -31,12 +29,37 @@ nav a:hover {
     color: black;
 }
 
+/* Main content */
 .container {
     padding: 20px;
     margin: 20px auto;
-    max-width: 1000px;
+    max-width: 100%;
     background-color: white;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ensure the container stretches to full width */
+}
+
+table {
+    width: 100%; /* Make the table take full width of the container */
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
 }
 
 footer {
@@ -48,3 +71,20 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+/* Make the website responsive */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+    }
+
+    nav a {
+        padding: 10px;
+    }
+
+    .container {
+        margin: 10px;
+        padding: 15px;
+    }
+}
+
