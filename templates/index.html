@@ -4,114 +4,219 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gene Expression Data</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
         }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Main content */
+        .container {
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 1000px;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
+
         table, th, td {
             border: 1px solid #ddd;
         }
+
         th, td {
             padding: 8px;
             text-align: left;
         }
+
         th {
             background-color: #f2f2f2;
         }
+
         tr:hover {
             background-color: #f1f1f1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Make the website responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+
+            nav a {
+                padding: 10px;
+            }
+
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <h1>Expression Data of Dorsally Projecting Motor Neurons</h1>
+    <!-- Header Section -->
+    <header>
+        <h1>Gene Expression Data of Dorsally Projecting Motor Neurons</h1>
+    </header>
 
-    <!-- Search Form -->
-    <form action="/" method="GET">
-        <label for="search">Search for a value:</label>
-        <input type="text" id="search" name="search" placeholder="Enter search value..." value="{{ search_query }}">
-        
-        <!-- Dropdown for selecting column -->
-        <label for="column">Choose a column to search:</label>
-        <select name="column" id="column">
-            <option value="Gene" {% if search_column == 'Gene' %}selected{% endif %}>Gene</option>
-            <option value="Janelia_ID" {% if search_column == 'Janelia_ID' %}selected{% endif %}>Janelia ID</option>
-            <option value="Line" {% if search_column == 'Line' %}selected{% endif %}>Line</option>
-            <option value="CGID" {% if search_column == 'CGID' %}selected{% endif %}>CGID</option>
-            <option value="Flybase_ID" {% if search_column == 'Flybase_ID' %}selected{% endif %}>Flybase ID</option>
-            <!-- Add other columns as needed -->
-        </select>
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#references">References</a>
+        <a href="#contact">Contact</a>
+    </nav>
 
-        <button type="submit">Search</button>
-    </form>
+    <!-- Home Section -->
+    <div class="container" id="home">
+        <h2>Expression Data</h2>
 
-    <h3>Results for: "{{ search_query }}" in column: "{{ search_column }}"</h3>
+        <!-- Search Form -->
+        <form action="/" method="GET">
+            <label for="search">Search for a value:</label>
+            <input type="text" id="search" name="search" placeholder="Enter search value..." value="{{ search_query }}">
 
-    <!-- Display the filtered data in a table -->
-    <table>
-        <thead>
-            <tr>
-                <th>Image</th>
-                <th>Janelia ID</th>
-                <th>Line</th>
-                <th>CGID</th>
-                <th>Gene</th>
-                <th>Flybase ID</th>
-                <th>Flybase Link</th>
-                <th>Expression</th>
-                <th>Eve Expression</th>
-                <th>Sequence Coordinates of Fragment</th>
-                <th>Fragment Length</th>
-                <th>Transmembrane Domain</th>
-                <th>Signal Domain</th>
-                <th>Interpro Description</th>
-                <th>Functional Group</th>
-                <th>SMART ID</th>
-                <th>PFAM ID</th>
-                <th>aCC</th>
-                <th>RP2</th>
-                <th>Us</th>
-                <th>pCC</th>
-                <th>ELs</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in filtered_data %}
-            <tr>
-                <td><a href="{{ row['Image'] }}" target="_blank">Link</a></td>
-                <td>{{ row['Janelia_ID'] }}</td>
-                <td>{{ row['Line'] }}</td>
-                <td>{{ row['CGID'] }}</td>
-                <td>{{ row['Gene'] }}</td>
-                <td>{{ row['Flybase_ID'] }}</td>
-                <td>{{ row['Flybase_Link'] }}</td>
-                <td>{{ row['Expressed'] }}</td>
-                <td>{{ row['Eve_Expression'] }}</td>
-                <td>{{ row['Seq_coord_of_fragment'] }}</td>
-                <td>{{ row['Fragment_length'] }}</td>
-                <td>{{ row['Transmembrane_Domain'] }}</td>
-                <td>{{ row['Signal_Domain'] }}</td>
-                <td>{{ row['Interpro_Description_GO_Term_Name'] }}</td>
-                <td>{{ row['Functional_Group'] }}</td>
-                <td>{{ row['SMART_ID'] }}</td>
-                <td>{{ row['PFAM_ID'] }}</td>
-                <td>{{ row['aCC'] }}</td>
-                <td>{{ row['RP2'] }}</td>
-                <td>{{ row['Us'] }}</td>
-                <td>{{ row['Pcc'] }}</td>
-                <td>{{ row['Els'] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            <!-- Dropdown for selecting column -->
+            <label for="column">Choose a column to search:</label>
+            <select name="column" id="column">
+                <option value="Gene" {% if search_column == 'Gene' %}selected{% endif %}>Gene</option>
+                <option value="Janelia_ID" {% if search_column == 'Janelia_ID' %}selected{% endif %}>Janelia ID</option>
+                <option value="Line" {% if search_column == 'Line' %}selected{% endif %}>Line</option>
+                <option value="CGID" {% if search_column == 'CGID' %}selected{% endif %}>CGID</option>
+                <option value="Flybase_ID" {% if search_column == 'Flybase_ID' %}selected{% endif %}>Flybase ID</option>
+                <!-- Add other columns as needed -->
+            </select>
+
+            <button type="submit">Search</button>
+        </form>
+
+        <h3>Results for: "{{ search_query }}" in column: "{{ search_column }}"</h3>
+
+        <!-- Display the filtered data in a table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Janelia ID</th>
+                    <th>Line</th>
+                    <th>CGID</th>
+                    <th>Gene</th>
+                    <th>Flybase ID</th>
+                    <th>Flybase Link</th>
+                    <th>Expression</th>
+                    <th>Eve Expression</th>
+                    <th>Sequence Coordinates of Fragment</th>
+                    <th>Fragment Length</th>
+                    <th>Transmembrane Domain</th>
+                    <th>Signal Domain</th>
+                    <th>Interpro Description</th>
+                    <th>Functional Group</th>
+                    <th>SMART ID</th>
+                    <th>PFAM ID</th>
+                    <th>aCC</th>
+                    <th>RP2</th>
+                    <th>Us</th>
+                    <th>pCC</th>
+                    <th>ELs</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in filtered_data %}
+                <tr>
+                    <td><a href="{{ row['Image'] }}" target="_blank">Link</a></td>
+                    <td>{{ row['Janelia_ID'] }}</td>
+                    <td>{{ row['Line'] }}</td>
+                    <td>{{ row['CGID'] }}</td>
+                    <td>{{ row['Gene'] }}</td>
+                    <td>{{ row['Flybase_ID'] }}</td>
+                    <td>{{ row['Flybase_Link'] }}</td>
+                    <td>{{ row['Expressed'] }}</td>
+                    <td>{{ row['Eve_Expression'] }}</td>
+                    <td>{{ row['Seq_coord_of_fragment'] }}</td>
+                    <td>{{ row['Fragment_length'] }}</td>
+                    <td>{{ row['Transmembrane_Domain'] }}</td>
+                    <td>{{ row['Signal_Domain'] }}</td>
+                    <td>{{ row['Interpro_Description_GO_Term_Name'] }}</td>
+                    <td>{{ row['Functional_Group'] }}</td>
+                    <td>{{ row['SMART_ID'] }}</td>
+                    <td>{{ row['PFAM_ID'] }}</td>
+                    <td>{{ row['aCC'] }}</td>
+                    <td>{{ row['RP2'] }}</td>
+                    <td>{{ row['Us'] }}</td>
+                    <td>{{ row['Pcc'] }}</td>
+                    <td>{{ row['Els'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- References Section -->
+    <div class="container" id="references">
+        <h2>References</h2>
+        <ul>
+            <li><a href="https://bdsc.indiana.edu/stocks/gal4/index.html" target="_blank">Drosophila Stock Information</a></li>
+            <li><a href="https://flweb.janelia.org/cgi-bin/flew.cgi" target="_blank">Enhancer Traps</a></li>
+            <li><a href="https://flybase.org/" target="_blank">FlyBase IDs and Gene information</a></li>
+            <li><a href="https://www.ensembl.org/info/data/biomart/index.html" target="_blank">Protein Domain Information</a></li>
+            <li><a href="https://davidbioinformatics.nih.gov/" target="_blank">GO Terminology</a></li>
+        </ul>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="container" id="contact">
+        <h2>Contact Information</h2>
+        <p>If you have any questions, feel free to reach out to us:</p>
+        <p>Email: <a href="mailto:contact@example.com">olshiels@tcd.ie</a></p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Gene Expression Data. All Rights Reserved.</p>
+    </footer>
 
 </body>
 </html>
