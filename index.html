@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gene Expression Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Expression Data of Dorsally Projecting Motor Neurons</h1>
+
+    <!-- Search Form -->
+    <form action="/" method="GET">
+        <label for="search">Search for a value:</label>
+        <input type="text" id="search" name="search" placeholder="Enter search value..." value="{{ search_query }}">
+        
+        <!-- Dropdown for selecting column -->
+        <label for="column">Choose a column to search:</label>
+        <select name="column" id="column">
+            <option value="Gene" {% if search_column == 'Gene' %}selected{% endif %}>Gene</option>
+            <option value="Janelia_ID" {% if search_column == 'Janelia_ID' %}selected{% endif %}>Janelia ID</option>
+            <option value="Line" {% if search_column == 'Line' %}selected{% endif %}>Line</option>
+            <option value="CGID" {% if search_column == 'CGID' %}selected{% endif %}>CGID</option>
+            <option value="Flybase_ID" {% if search_column == 'Flybase_ID' %}selected{% endif %}>Flybase ID</option>
+            <!-- Add other columns as needed -->
+        </select>
+
+        <button type="submit">Search</button>
+    </form>
+
+    <h3>Results for: "{{ search_query }}" in column: "{{ search_column }}"</h3>
+
+    <!-- Display the filtered data in a table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Janelia ID</th>
+                <th>Line</th>
+                <th>CGID</th>
+                <th>Gene</th>
+                <th>Flybase ID</th>
+                <th>Flybase Link</th>
+                <th>Expression</th>
+                <th>Eve Expression</th>
+                <th>Sequence Coordinates of Fragment</th>
+                <th>Fragment Length</th>
+                <th>Transmembrane Domain</th>
+                <th>Signal Domain</th>
+                <th>Interpro Description</th>
+                <th>Functional Group</th>
+                <th>SMART ID</th>
+                <th>PFAM ID</th>
+                <th>aCC</th>
+                <th>RP2</th>
+                <th>Us</th>
+                <th>pCC</th>
+                <th>ELs</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in filtered_data %}
+            <tr>
+                <td><a href="{{ row['Image'] }}" target="_blank">Link</a></td>
+                <td>{{ row['Janelia_ID'] }}</td>
+                <td>{{ row['Line'] }}</td>
+                <td>{{ row['CGID'] }}</td>
+                <td>{{ row['Gene'] }}</td>
+                <td>{{ row['Flybase_ID'] }}</td>
+                <td>{{ row['Flybase_Link'] }}</td>
+                <td>{{ row['Expressed'] }}</td>
+                <td>{{ row['Eve_Expression'] }}</td>
+                <td>{{ row['Seq_coord_of_fragment'] }}</td>
+                <td>{{ row['Fragment_length'] }}</td>
+                <td>{{ row['Transmembrane_Domain'] }}</td>
+                <td>{{ row['Signal_Domain'] }}</td>
+                <td>{{ row['Interpro_Description_GO_Term_Name'] }}</td>
+                <td>{{ row['Functional_Group'] }}</td>
+                <td>{{ row['SMART_ID'] }}</td>
+                <td>{{ row['PFAM_ID'] }}</td>
+                <td>{{ row['aCC'] }}</td>
+                <td>{{ row['RP2'] }}</td>
+                <td>{{ row['Us'] }}</td>
+                <td>{{ row['Pcc'] }}</td>
+                <td>{{ row['Els'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
