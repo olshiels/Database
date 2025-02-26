@@ -8,7 +8,7 @@ app = Flask(__name__)
 def load_data():
     data = []  # Initialize the data list
     try:
-        with open('database.csv', mode='r') as file:
+        with open('./database.csv', mode='r') as file:
             reader = csv.DictReader(file)
             for row in reader:
                 row = {key.strip(): value.strip() if value.strip() != '' else 'N/A' for key, value in row.items()}
