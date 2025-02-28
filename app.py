@@ -35,7 +35,7 @@ def home():
     else:
         filtered_data = data
     
-    return render_template('index.html', data=data=filtered_data, search_query=search_query, search_column=search_column)
+    return render_template('index.html', data=filtered_data, search_query=search_query, search_column=search_column)
 
 
 if __name__ == '__main__':
