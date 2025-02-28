@@ -1,4 +1,5 @@
 import csv
+from urllib.parse import quote_plus
 from flask import Flask, render_template, request
 
 # Initialize the Flask application
@@ -36,6 +37,10 @@ def home():
         filtered_data = data
     
     return render_template('index.html', data=data, filtered_data=filtered_data, search_query=search_query, search_column=search_column)
+
+# Before passing to the template, ensure the Flybase_Link is properly encoded
+    for row in filtered_data:
+        row['Flybase_Link'] = quote_plus(row['Flybase_Link'])  # Encodes special characters
 
 if __name__ == '__main__':
     app.run(debug=True)
