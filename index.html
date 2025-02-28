@@ -86,13 +86,13 @@
         <tbody>
             {% for row in filtered_data %}
             <tr>
-                <td><a href="{{ row['Image'] }}" target="_blank">Link</a></td>
+                <td><a href="{{ row['Image'] }}" target="_blank">Image</a></td>
                 <td>{{ row['Janelia_ID'] }}</td>
                 <td>{{ row['Line'] }}</td>
                 <td>{{ row['CGID'] }}</td>
                 <td>{{ row['Gene'] }}</td>
                 <td>{{ row['Flybase_ID'] }}</td>
-                <td>{{ row['Flybase_Link'] }}</td>
+                <td>{{ href="{{ row['Flybase_Link'] }}" target="_blank">FlyBase Id</a></td>
                 <td>{{ row['Expressed'] }}</td>
                 <td>{{ row['Eve_Expression'] }}</td>
                 <td>{{ row['Seq_coord_of_fragment'] }}</td>
