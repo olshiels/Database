@@ -92,7 +92,7 @@
                 <td>{{ row['CGID'] }}</td>
                 <td>{{ row['Gene'] }}</td>
                 <td>{{ row['Flybase_ID'] }}</td>
-                <td><a href="{{ row['Flybase_Link'] }}" target="_blank">Flybase ID</a></td>
+                <td><a href="{{ row['Flybase_Link'] | safe }}" target="_blank">Flybase ID</a></td>
                 <td>{{ row['Expressed'] }}</td>
                 <td>{{ row['Eve_Expression'] }}</td>
                 <td>{{ row['Seq_coord_of_fragment'] }}</td>
