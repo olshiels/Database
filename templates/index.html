@@ -166,7 +166,7 @@
             <tbody>
                 {% for row in filtered_data %}
                 <tr>
-                    <td><a href="{{ row['Image'] }}" target="_blank">Link</a></td>
+                    <td><a href="https://flweb.janelia.org/cgi-bin/view_flew_imagery.cgi?line={{ row['Image'] }}&mode=embryo" target="_blank">Image</a>
                     <td>{{ row['Janelia_ID'] }}</td>
                     <td>{{ row['Line'] }}</td>
                     <td>{{ row['CGID'] }}</td>
