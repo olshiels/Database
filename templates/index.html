@@ -166,7 +166,7 @@
             <tbody>
                 {% for row in filtered_data %}
                 <tr>
-                    <td><a href="{{ row['Image'] }}" target="_blank">Image</a></td>
+                    <td><a href="{{ row['Image'] | safe }}" target="_blank">Image</a></td>
                     <td>{{ row['Janelia_ID'] }}</td>
                     <td>{{ row['Line'] }}</td>
                     <td>{{ row['CGID'] }}</td>
@@ -209,7 +209,7 @@
     <!-- Contact Section -->
     <div class="container" id="contact">
         <h2>Contact Information</h2>
-        <p>If you have any questions, feel free to reach out to us:</p>
+        <p>If you have any questions, feel free to reach out to me:</p>
         <p>Email: <a href="mailto:contact@example.com">olshiels@tcd.ie</a></p>
     </div>
 
