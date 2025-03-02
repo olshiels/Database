@@ -139,7 +139,6 @@
         <table>
             <thead>
                 <tr>
-                    <th>Image</th>
                     <th>Janelia ID</th>
                     <th>Line</th>
                     <th>CGID</th>
@@ -166,7 +165,6 @@
             <tbody>
                 {% for row in filtered_data %}
                 <tr>
-                    <td><a href="{{ row['Image'] | safe }}" target="_blank">Image</a></td>
                     <td>{{ row['Janelia_ID'] }}</td>
                     <td>{{ row['Line'] }}</td>
                     <td>{{ row['CGID'] }}</td>
